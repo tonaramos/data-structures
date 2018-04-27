@@ -22,13 +22,26 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
-    if (this.head.next === null) {
-      return this.head.value === target;
-    } else if (this.next === null) {
-      return this.value === target;
-    } else {
-      this.next.contains(target);
+    // if (this.head.next === null) {
+    //   return this.head.value === target;
+    // } else if (this.next === null) {
+    //   return this.value === target;
+    // } else {
+    //   this.next.contains(target);
+    // }
+    var result = false;
+    function checkNode(node, target) {
+      if (node.next === null) {
+        result = node.value === target;
+        return result;
+      } else if (node.value === target) {
+        result = true;
+      } else {
+        checkNode(node.next, target);
+      }
     }
+    checkNode(this.head, target);
+    return result;
   };
 
   return list;
@@ -45,4 +58,7 @@ var Node = function(value) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ list.addtoTail: O(1);
+ list.removeHead:
+ list.contains:
  */
